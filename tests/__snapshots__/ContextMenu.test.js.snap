@@ -5,21 +5,20 @@ exports[`ContextMenu tests does not shows when event with incorrect "id" is trig
   className=""
   data={Object {}}
   hideOnLeave={false}
+  hideOnScroll={true}
   id="CORRECT_ID"
   onHide={[Function]}
   onMouseLeave={[Function]}
   onShow={[Function]}
 >
   <nav
-    className="react-contextmenu"
+    className="react-contextmenu react-contextmenu-root"
     onContextMenu={[Function]}
     onMouseLeave={[Function]}
     role="menu"
     style={
       Object {
-        "opacity": 0,
-        "pointerEvents": "none",
-        "position": "fixed",
+        "display": "none",
       }
     }
     tabIndex="-1"
@@ -32,21 +31,20 @@ exports[`ContextMenu tests does not shows when event with incorrect "id" is trig
   className=""
   data={Object {}}
   hideOnLeave={false}
+  hideOnScroll={true}
   id="CORRECT_ID"
   onHide={[Function]}
   onMouseLeave={[Function]}
   onShow={[Function]}
 >
   <nav
-    className="react-contextmenu"
+    className="react-contextmenu react-contextmenu-root"
     onContextMenu={[Function]}
     onMouseLeave={[Function]}
     role="menu"
     style={
       Object {
-        "opacity": 0,
-        "pointerEvents": "none",
-        "position": "fixed",
+        "display": "none",
       }
     }
     tabIndex="-1"
@@ -59,21 +57,20 @@ exports[`ContextMenu tests shows when event with correct "id" is triggered 1`] =
   className=""
   data={Object {}}
   hideOnLeave={false}
+  hideOnScroll={true}
   id="CORRECT_ID"
   onHide={[Function]}
   onMouseLeave={[Function]}
   onShow={[Function]}
 >
   <nav
-    className="react-contextmenu"
+    className="react-contextmenu react-contextmenu-root"
     onContextMenu={[Function]}
     onMouseLeave={[Function]}
     role="menu"
     style={
       Object {
-        "opacity": 0,
-        "pointerEvents": "none",
-        "position": "fixed",
+        "display": "none",
       }
     }
     tabIndex="-1"
@@ -86,21 +83,20 @@ exports[`ContextMenu tests shows when event with correct "id" is triggered 2`] =
   className=""
   data={Object {}}
   hideOnLeave={false}
+  hideOnScroll={true}
   id="CORRECT_ID"
   onHide={[Function]}
   onMouseLeave={[Function]}
   onShow={[Function]}
 >
   <nav
-    className="react-contextmenu react-contextmenu--visible"
+    className="react-contextmenu react-contextmenu-root"
     onContextMenu={[Function]}
     onMouseLeave={[Function]}
     role="menu"
     style={
       Object {
-        "opacity": 0,
-        "pointerEvents": "none",
-        "position": "fixed",
+        "display": "none",
       }
     }
     tabIndex="-1"

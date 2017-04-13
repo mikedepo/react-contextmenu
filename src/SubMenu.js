@@ -26,6 +26,8 @@ export default class SubMenu extends Component {
         this.state = {
             visible: false
         };
+
+        this.menuHeight = null;
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -36,7 +38,7 @@ export default class SubMenu extends Component {
         if (this.state.visible) {
             const wrapper = window.requestAnimationFrame || setTimeout;
 
-            wrapper(() => {
+            this.updatetimer = wrapper(() => {
                 const styles = this.props.rtl
                                 ? this.getRTLMenuPosition()
                                 : this.getMenuPosition();
@@ -46,9 +48,9 @@ export default class SubMenu extends Component {
                 this.subMenu.style.removeProperty('left');
                 this.subMenu.style.removeProperty('right');
 
-                if (hasOwnProp(styles, 'top')) this.subMenu.style.top = styles.top;
+                if (hasOwnProp(styles, 'top')) this.subMenu.style.top = `${styles.top}px`;
                 if (hasOwnProp(styles, 'left')) this.subMenu.style.left = styles.left;
-                if (hasOwnProp(styles, 'bottom')) this.subMenu.style.bottom = styles.bottom;
+                if (hasOwnProp(styles, 'bottom')) this.subMenu.style.bottom = `${styles.bottom}px`;
                 if (hasOwnProp(styles, 'right')) this.subMenu.style.right = styles.right;
                 this.subMenu.classList.add(cssClasses.menuVisible);
             });
@@ -62,23 +64,36 @@ export default class SubMenu extends Component {
     }
 
     componentWillUnmount() {
-        if (this.opentimer) clearTimeout(this.opentimer);
-
-        if (this.closetimer) clearTimeout(this.closetimer);
+        if (this.updatetimer) {
+            const clearFnc = window.cancelAnimationFrame || clearTimeout;
+            clearFnc(this.updatetimer);
+        }
+        if (this.opentimer) {
+            clearTimeout(this.opentimer);
+        }
+        if (this.closetimer) {
+            clearTimeout(this.closetimer);
+        }
     }
 
     getMenuPosition = () => {
         const { innerWidth, innerHeight } = window;
-        const rect = this.subMenu.getBoundingClientRect();
+        const menuRect = this.menu.getBoundingClientRect();
+        const subMenuRect = this.subMenu.getBoundingClientRect();
         const position = {};
 
-        if (rect.bottom > innerHeight) {
-            position.bottom = 0;
+        if (subMenuRect.bottom > innerHeight) {
+            if (menuRect.bottom < subMenuRect.height) {
+                const menuHeight = this.getMenuHeight() || menuRect.height;
+                position.top = Math.floor(menuRect.top / menuHeight) * menuHeight * -1;
+            } else {
+                position.bottom = 0;
+            }
         } else {
             position.top = 0;
         }
 
-        if (rect.right < innerWidth) {
+        if (subMenuRect.right < innerWidth) {
             position.left = '100%';
         } else {
             position.right = '100%';
@@ -89,22 +104,38 @@ export default class SubMenu extends Component {
 
     getRTLMenuPosition = () => {
         const { innerHeight } = window;
-        const rect = this.subMenu.getBoundingClientRect();
+        const menuRect = this.menu.getBoundingClientRect();
+        const subMenuRect = this.subMenu.getBoundingClientRect();
         const position = {};
 
-        if (rect.bottom > innerHeight) {
-            position.bottom = 0;
+        if (subMenuRect.bottom > innerHeight) {
+            if (menuRect.bottom < subMenuRect.height) {
+                const menuHeight = this.getMenuHeight() || menuRect.height;
+                position.top = Math.floor(menuRect.top / menuHeight) * menuHeight * -1;
+            } else {
+                position.bottom = 0;
+            }
         } else {
             position.top = 0;
         }
 
-        if (rect.left < 0) {
+        if (subMenuRect.left < 0) {
             position.left = '100%';
         } else {
             position.right = '100%';
         }
 
         return position;
+    }
+
+    getMenuHeight() {
+        if (this.menuHeight === null) {
+            const menuStyles = window.getComputedStyle(this.menu);
+            const menuMargin = parseFloat(menuStyles.marginTop) + parseFloat(menuStyles.marginBottom);
+            this.menuHeight = Math.ceil(this.menu.offsetHeight + menuMargin);
+        }
+
+        return this.menuHeight;
     }
 
     handleClick = (e) => {
