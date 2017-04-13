@@ -12,6 +12,7 @@ export function uniqueId() {
 
 export const cssClasses = {
     menu: 'react-contextmenu',
+    menuRoot: 'react-contextmenu-root',
     menuVisible: 'react-contextmenu--visible',
     menuWrapper: 'react-contextmenu-wrapper',
     menuItem: 'react-contextmenu-item',

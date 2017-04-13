@@ -13,6 +13,7 @@ export default class ContextMenu extends Component {
         data: PropTypes.object,
         className: PropTypes.string,
         hideOnLeave: PropTypes.bool,
+        hideOnScroll: PropTypes.bool,
         onHide: PropTypes.func,
         onMouseLeave: PropTypes.func,
         onShow: PropTypes.func
@@ -22,6 +23,7 @@ export default class ContextMenu extends Component {
         className: '',
         data: {},
         hideOnLeave: false,
+        hideOnScroll: true,
         onHide() { return null; },
         onMouseLeave() { return null; },
         onShow() { return null; }
@@ -46,20 +48,22 @@ export default class ContextMenu extends Component {
             const wrapper = window.requestAnimationFrame || setTimeout;
 
             wrapper(() => {
-                const { x, y } = this.state;
+                this.menu.style.removeProperty('display');
 
+                const { x, y } = this.state;
                 const { top, left } = this.getMenuPosition(x, y);
 
                 wrapper(() => {
                     this.menu.style.top = `${top}px`;
                     this.menu.style.left = `${left}px`;
-                    this.menu.style.opacity = 1;
-                    this.menu.style.pointerEvents = 'auto';
+                    this.menu.classList.add(cssClasses.menuVisible);
                 });
             });
         } else {
-            this.menu.style.opacity = 0;
-            this.menu.style.pointerEvents = 'none';
+            this.menu.classList.remove(cssClasses.menuVisible);
+            this.menu.style.top = 0;
+            this.menu.style.left = 0;
+            this.menu.style.display = 'none';
         }
     }
 
@@ -74,18 +78,22 @@ export default class ContextMenu extends Component {
     registerHandlers = () => { // eslint-disable-line react/sort-comp
         document.addEventListener('mousedown', this.handleOutsideClick);
         document.addEventListener('ontouchstart', this.handleOutsideClick);
-        document.addEventListener('scroll', this.handleHide);
         document.addEventListener('contextmenu', this.handleHide);
         document.addEventListener('keyup', this.handleEscape);
+        if (this.props.hideOnScroll) {
+            document.addEventListener('scroll', this.handleHide);
+        }
         window.addEventListener('resize', this.handleHide);
     }
 
     unregisterHandlers = () => {
         document.removeEventListener('mousedown', this.handleOutsideClick);
         document.removeEventListener('ontouchstart', this.handleOutsideClick);
-        document.removeEventListener('scroll', this.handleHide);
         document.removeEventListener('contextmenu', this.handleHide);
         document.removeEventListener('keyup', this.handleEscape);
+        if (this.props.hideOnScroll) {
+            document.removeEventListener('scroll', this.handleHide);
+        }
         window.removeEventListener('resize', this.handleHide);
     }
 
@@ -133,28 +141,30 @@ export default class ContextMenu extends Component {
     getMenuPosition = (x = 0, y = 0) => {
         const { innerWidth, innerHeight } = window;
         const rect = this.menu.getBoundingClientRect();
-        const menuStyles = {
-            top: y,
-            left: x
-        };
+        const menuPos = { x, y };
 
         if (y + rect.height > innerHeight) {
-            menuStyles.top -= rect.height;
+            menuPos.y -= rect.height;
         }
 
         if (x + rect.width > innerWidth) {
-            menuStyles.left -= rect.width;
+            menuPos.x -= rect.width;
         }
 
-        if (menuStyles.top < 0) {
-            menuStyles.top = rect.height < innerHeight ? (innerHeight - rect.height) / 2 : 0;
+        if (menuPos.y < 0) {
+            menuPos.y = rect.height < innerHeight ? (innerHeight - rect.height) / 2 : 0;
         }
 
-        if (menuStyles.left < 0) {
-            menuStyles.left = rect.width < innerWidth ? (innerWidth - rect.width) / 2 : 0;
+        if (menuPos.x < 0) {
+            menuPos.x = rect.width < innerWidth ? (innerWidth - rect.width) / 2 : 0;
         }
 
-        return menuStyles;
+        const menuStyle = {
+            top: menuPos.y - rect.top,
+            left: menuPos.x - rect.left
+        };
+
+        return menuStyle;
     }
 
     menuRef = (c) => {
@@ -163,11 +173,8 @@ export default class ContextMenu extends Component {
 
     render() {
         const { children, className } = this.props;
-        const { isVisible } = this.state;
-        const style = { position: 'fixed', opacity: 0, pointerEvents: 'none' };
-        const menuClassnames = cx(cssClasses.menu, className, {
-            [cssClasses.menuVisible]: isVisible
-        });
+        const style = { display: 'none' };
+        const menuClassnames = cx(cssClasses.menu, cssClasses.menuRoot, className);
 
         return (
             <nav
