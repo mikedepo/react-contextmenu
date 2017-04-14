@@ -175,13 +175,16 @@ export default class ContextMenu extends Component {
         const { children, className } = this.props;
         const style = { display: 'none' };
         const menuClassnames = cx(cssClasses.menu, cssClasses.menuRoot, className);
+        const wrapperStyle = { position: 'relative' };
 
         return (
-            <nav
-                role='menu' tabIndex='-1' ref={this.menuRef} style={style} className={menuClassnames}
-                onContextMenu={this.handleHide} onMouseLeave={this.handleMouseLeave}>
-                {children}
-            </nav>
+            <div style={wrapperStyle}>
+                <nav
+                    role='menu' tabIndex='-1' ref={this.menuRef} style={style} className={menuClassnames}
+                    onContextMenu={this.handleHide} onMouseLeave={this.handleMouseLeave}>
+                    {children}
+                </nav>
+            </div>
         );
     }
 }
