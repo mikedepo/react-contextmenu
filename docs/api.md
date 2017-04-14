@@ -56,9 +56,10 @@ A component for using submenus within the contextmenu.
 
 #### PropTypes
 
-| Property   | Type    | Required? | Default | Description                                                                 |
-|------------|---------|-----------|---------|-----------------------------------------------------------------------------|
-| title      | String  | ✓         |         | The content to be displayed in parent menu.                                 |
-| disabled   | Boolean |           | `false` | If `true`, disables the menu from opening and adds `.disabled` class.       |
-| hoverDelay | Number  |           | `500`   | The time (in ms) after which the menu is to be displayed when hovered upon. |
-| classNames | String  |           |         | Custom `className` applied to root element of the context-menu.             |
+| Property   | Type    | Required? | Default | Description                                                                  |
+|------------|---------|-----------|---------|------------------------------------------------------------------------------|
+| title      | String  | ✓         |         | The content to be displayed in parent menu.                                  |
+| disabled   | Boolean |           | `false` | If `true`, disables the menu from opening and adds `.disabled` class.        |
+| hoverDelay | Number  |           | `500`   | The time (in ms) after which the menu is to be displayed when hovered upon.  |
+| className  | String  |           |         | Custom `className` applied to root element of the context-menu.              |
+| menuItem   | Object  |           |         | Custom properties for the menu item used in the submenu (onClick, data, ...) |

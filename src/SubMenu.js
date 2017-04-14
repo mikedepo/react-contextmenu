@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
+import assign from 'object-assign';
 
+import MenuItem from './MenuItem';
 import { cssClasses, hasOwnProp } from './helpers';
 
 export default class SubMenu extends Component {
@@ -9,12 +11,14 @@ export default class SubMenu extends Component {
         title: PropTypes.node.isRequired,
         className: PropTypes.string,
         disabled: PropTypes.bool,
+        menuItem: PropTypes.shape(MenuItem.propTypes),
         hoverDelay: PropTypes.number,
         rtl: PropTypes.bool
     };
 
     static defaultProps = {
         disabled: false,
+        menuItem: {},
         hoverDelay: 500,
         className: '',
         rtl: false
@@ -138,10 +142,6 @@ export default class SubMenu extends Component {
         return this.menuHeight;
     }
 
-    handleClick = (e) => {
-        e.preventDefault();
-    }
-
     handleMouseEnter = () => {
         if (this.closetimer) clearTimeout(this.closetimer);
 
@@ -167,7 +167,7 @@ export default class SubMenu extends Component {
     }
 
     render() {
-        const { children, disabled, title } = this.props;
+        const { children, disabled, title, menuItem } = this.props;
         const { visible } = this.state;
         const menuProps = {
             ref: this.menuRef,
@@ -178,13 +178,11 @@ export default class SubMenu extends Component {
                 position: 'relative'
             }
         };
-        const menuItemProps = {
-            className: cx(cssClasses.menuItem, {
-                [cssClasses.menuItemDisabled]: disabled,
-                [cssClasses.menuItemActive]: visible
-            }),
-            onClick: this.handleClick
-        };
+        const menuItemProps = assign({ attributes: {} }, menuItem);
+        menuItemProps.attributes.className = cx(menuItemProps.attributes.className, {
+            [cssClasses.menuItemActive]: visible
+        });
+        menuItemProps.disabled = menuItemProps.disabled || disabled;
         const subMenuProps = {
             ref: this.subMenuRef,
             style: {
@@ -197,9 +195,9 @@ export default class SubMenu extends Component {
 
         return (
             <nav {...menuProps} role='menuitem' tabIndex='-1' aria-haspopup='true'>
-                <div {...menuItemProps}>
+                <MenuItem {...menuItemProps}>
                     {title}
-                </div>
+                </MenuItem>
                 <nav {...subMenuProps} role='menu' tabIndex='-1'>
                     {children}
                 </nav>

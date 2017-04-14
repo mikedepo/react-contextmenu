@@ -45,6 +45,10 @@ export default class SimpleMenu extends Component {
                             <MenuItem onClick={this.handleClick} data={{ item: 'subsubitem 4' }}>SubSubItem 4</MenuItem>
                         </SubMenu>
                         <MenuItem onClick={this.handleClick} data={{ item: 'subitem 2' }}>SubItem 2</MenuItem>
+                        <SubMenu title='A clickable SubMenu' menuItem={{ onClick: this.handleClick, data: { item: 'subsubmenu 3' } }}>
+                            <MenuItem onClick={this.handleClick} data={{ item: 'subsubitem 5' }}>SubSubItem 5</MenuItem>
+                            <MenuItem onClick={this.handleClick} data={{ item: 'subsubitem 6' }}>SubSubItem 6</MenuItem>
+                        </SubMenu>
                     </SubMenu>
                 </ContextMenu>
             </div>

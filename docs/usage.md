@@ -49,7 +49,8 @@ See [examples](./examples) for more in detail usage.
 
 The styling can be apllied to using following classes.
 
-- `react-contextmenu` : applied to menu root element.
+- `react-contextmenu` : applied to menu root element and all submenus.
+- `react-contextmenu-root` : applied to menu root element.
 - `react-contextmenu--visible` : applied to menu root element when visible.
 - `react-contextmenu-item` : applied to menu items.
 - `react-contextmenu-item--active` : applied to menu items and title in submenu when submenu is open.

@@ -85,7 +85,7 @@ describe('ContextMenu tests', () => {
 
         showMenu(data);
         expect(component.state()).toEqual(Object.assign({isVisible: true}, data.position));
-        component.simulate('mousedown');
+        component.find('nav').simulate('mousedown');
         expect(component.state()).toEqual(Object.assign({isVisible: true}, data.position));
         document.dispatchEvent(outsideClick);
         expect(component.state()).toEqual(Object.assign({isVisible: false}, data.position));
@@ -102,7 +102,7 @@ describe('ContextMenu tests', () => {
 
         showMenu(data);
         expect(component.state()).toEqual(Object.assign({isVisible: true}, data.position));
-        component.simulate('mouseleave');
+        component.find('nav').simulate('mouseleave');
         expect(component.state()).toEqual(Object.assign({isVisible: false}, data.position));
         expect(onMouseLeave).toHaveBeenCalled();
         component.unmount();

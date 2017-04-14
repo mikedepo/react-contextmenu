@@ -11,18 +11,26 @@ exports[`ContextMenu tests does not shows when event with incorrect "id" is trig
   onMouseLeave={[Function]}
   onShow={[Function]}
 >
-  <nav
-    className="react-contextmenu react-contextmenu-root"
-    onContextMenu={[Function]}
-    onMouseLeave={[Function]}
-    role="menu"
+  <div
     style={
       Object {
-        "display": "none",
+        "position": "relative",
       }
     }
-    tabIndex="-1"
-  />
+  >
+    <nav
+      className="react-contextmenu react-contextmenu-root"
+      onContextMenu={[Function]}
+      onMouseLeave={[Function]}
+      role="menu"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+      tabIndex="-1"
+    />
+  </div>
 </ContextMenu>
 `;
 
@@ -37,18 +45,26 @@ exports[`ContextMenu tests does not shows when event with incorrect "id" is trig
   onMouseLeave={[Function]}
   onShow={[Function]}
 >
-  <nav
-    className="react-contextmenu react-contextmenu-root"
-    onContextMenu={[Function]}
-    onMouseLeave={[Function]}
-    role="menu"
+  <div
     style={
       Object {
-        "display": "none",
+        "position": "relative",
       }
     }
-    tabIndex="-1"
-  />
+  >
+    <nav
+      className="react-contextmenu react-contextmenu-root"
+      onContextMenu={[Function]}
+      onMouseLeave={[Function]}
+      role="menu"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+      tabIndex="-1"
+    />
+  </div>
 </ContextMenu>
 `;
 
@@ -63,18 +79,26 @@ exports[`ContextMenu tests shows when event with correct "id" is triggered 1`] =
   onMouseLeave={[Function]}
   onShow={[Function]}
 >
-  <nav
-    className="react-contextmenu react-contextmenu-root"
-    onContextMenu={[Function]}
-    onMouseLeave={[Function]}
-    role="menu"
+  <div
     style={
       Object {
-        "display": "none",
+        "position": "relative",
       }
     }
-    tabIndex="-1"
-  />
+  >
+    <nav
+      className="react-contextmenu react-contextmenu-root"
+      onContextMenu={[Function]}
+      onMouseLeave={[Function]}
+      role="menu"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+      tabIndex="-1"
+    />
+  </div>
 </ContextMenu>
 `;
 
@@ -89,17 +113,25 @@ exports[`ContextMenu tests shows when event with correct "id" is triggered 2`] =
   onMouseLeave={[Function]}
   onShow={[Function]}
 >
-  <nav
-    className="react-contextmenu react-contextmenu-root"
-    onContextMenu={[Function]}
-    onMouseLeave={[Function]}
-    role="menu"
+  <div
     style={
       Object {
-        "display": "none",
+        "position": "relative",
       }
     }
-    tabIndex="-1"
-  />
+  >
+    <nav
+      className="react-contextmenu react-contextmenu-root"
+      onContextMenu={[Function]}
+      onMouseLeave={[Function]}
+      role="menu"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+      tabIndex="-1"
+    />
+  </div>
 </ContextMenu>
 `;
