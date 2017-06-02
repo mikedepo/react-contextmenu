@@ -13,7 +13,8 @@ export default class MenuItem extends Component {
         disabled: PropTypes.bool,
         divider: PropTypes.bool,
         preventClose: PropTypes.bool,
-        onClick: PropTypes.func
+        onClick: PropTypes.func,
+        selected: PropTypes.bool
     };
 
     static defaultProps = {
@@ -23,7 +24,8 @@ export default class MenuItem extends Component {
         attributes: {},
         preventClose: false,
         onClick() { return null; },
-        children: null
+        children: null,
+        selected: false
     };
 
     handleClick = (event) => {
@@ -44,10 +46,11 @@ export default class MenuItem extends Component {
     }
 
     render() {
-        const { disabled, divider, children, attributes } = this.props;
+        const { disabled, divider, children, attributes, selected } = this.props;
         const menuItemClassNames = cx(cssClasses.menuItem, attributes && attributes.className, {
             [cssClasses.menuItemDisabled]: disabled,
-            [cssClasses.menuItemDivider]: divider
+            [cssClasses.menuItemDivider]: divider,
+            [cssClasses.menuItemSelected]: selected
         });
 
         return (

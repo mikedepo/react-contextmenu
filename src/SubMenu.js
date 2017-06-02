@@ -34,12 +34,6 @@ export default class SubMenu extends Component {
         this.menuHeight = null;
     }
 
-    /*
-    shouldComponentUpdate(nextProps, nextState) {
-        return this.state.visible !== nextState.visible;
-    }
-    */
-
     componentDidUpdate() {
         if (this.state.visible) {
             const wrapper = window.requestAnimationFrame || setTimeout;

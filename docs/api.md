@@ -45,10 +45,11 @@ A Simple Component for menu items.
 | Property     | Type     | Required? | Default | Description                                                                                                                                                                                                                                                                |
 |--------------|----------|-----------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | onClick      | Function | ✓         |         | The function to be called on click of item. The function will receive three parameters. The first is `event` object. The second is the merged data passed using `props.data` and collect from `ContextMenuTrigger`. The third is the element on which right-click occured. |
-| data         | Object   |           | `{}`    | The extra data (if required) to be passed to `onClick` event.                                                                                                                                                                                                              |
-| disabled     | Boolean  |           | `false` | If `true`, disables the click event and adds `.disabled` class.                                                                                                                                                                                                            |
-| preventClose | Boolean  |           | false   | By default, the context menu is closed as soon as an item is clicked. Set this prop to control this behavior.                                                                                                                                                              |
-| attributes   | Object   |           |         | The attributes will be passed directly passed to the root element of `MenuItem`. Use this to customize it like adding custom classes, etc.                                                                                                                                 |
+| data         | Object   |           | `{}`    | The extra data (if required) to be passed to `onClick` event. |
+| disabled     | Boolean  |           | `false` | If `true`, disables the click event and adds `.disabled` class. |
+| selected     | Boolean  |           | `false` | If set to `true` the css class `react-contextmenu-item--selected` will be added to associated element. |
+| preventClose | Boolean  |           | `false` | By default, the context menu is closed as soon as an item is clicked. Set this prop to control this behavior. |
+| attributes   | Object   |           |         | The attributes will be passed directly passed to the root element of `MenuItem`. Use this to customize it like adding custom classes, etc. |
 
 ### `<SubMenu />`
 
