@@ -1,6 +1,6 @@
 {
   "name": "@nkahn/react-contextmenu",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "Context Menu implemented in React",
   "main": "modules/index.js",
   "module": "es6/index.js",
@@ -43,6 +43,7 @@
   "homepage": "https://github.com/nkahnfr/react-contextmenu",
   "dependencies": {
     "classnames": "^2.2.5",
+    "deep-assign": "^2.0.0",
     "object-assign": "^4.1.0"
   },
   "peerDependencies": {

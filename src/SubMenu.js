@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-import assign from 'object-assign';
+import deepAssign from 'deep-assign';
 
 import MenuItem from './MenuItem';
 import { cssClasses, hasOwnProp } from './helpers';
@@ -34,9 +34,11 @@ export default class SubMenu extends Component {
         this.menuHeight = null;
     }
 
+    /*
     shouldComponentUpdate(nextProps, nextState) {
-        return this.state.isVisible !== nextState.visible;
+        return this.state.visible !== nextState.visible;
     }
+    */
 
     componentDidUpdate() {
         if (this.state.visible) {
@@ -178,7 +180,7 @@ export default class SubMenu extends Component {
                 position: 'relative'
             }
         };
-        const menuItemProps = assign({ attributes: {} }, menuItem);
+        const menuItemProps = deepAssign({ attributes: {} }, menuItem);
         menuItemProps.attributes.className = cx(menuItemProps.attributes.className, {
             [cssClasses.menuItemActive]: visible
         });
