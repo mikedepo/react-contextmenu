@@ -37,13 +37,21 @@ export default class ContextMenu extends Component {
             y: 0,
             isVisible: false
         };
+
+        this.isVisibilityChange = false;
     }
 
     componentDidMount() {
         this.listenId = listener.register(this.handleShow, this.handleHide);
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        this.isVisibilityChange = this.state.isVisible !== nextState.isVisible;
+        return true;
+    }
+
     componentDidUpdate() {
+        if (!this.isVisibilityChange) return;
         if (this.state.isVisible) {
             const wrapper = window.requestAnimationFrame || setTimeout;
 
