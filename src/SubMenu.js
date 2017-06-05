@@ -31,10 +31,17 @@ export default class SubMenu extends Component {
             visible: false
         };
 
+        this.isVisibilityChange = false;
         this.menuHeight = null;
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        this.isVisibilityChange = this.state.visible !== nextState.visible;
+        return true;
+    }
+
     componentDidUpdate() {
+        if (!this.isVisibilityChange) return;
         if (this.state.visible) {
             const wrapper = window.requestAnimationFrame || setTimeout;
 
